@@ -32,11 +32,11 @@ def upload_file():
     if uploaded_file.filename != '':
         print(os.getcwd())
         uploaded_file.save(os.path.join('csv_data',  uploaded_file.filename))
-        s3_client = boto3.client('s3', aws_access_key_id='AKIAQLOZZIL6GGLX5PEF',
-                          aws_secret_access_key='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')
+        s3_client = boto3.client('s3', aws_access_key_id='',
+                          aws_secret_access_key='')
         print('client name is.....', s3_client)
-        s3_resource = boto3.resource('s3', aws_access_key_id='AKIAQLOZZIL6GGLX5PEF',
-                                     aws_secret_access_key='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')
+        s3_resource = boto3.resource('s3', aws_access_key_id='',
+                                     aws_secret_access_key='')
         print('client name is.....', s3_resource)
         my_bucket = s3_resource.Bucket('ml-flow01')
         # print('bucket name is....', bucket)
