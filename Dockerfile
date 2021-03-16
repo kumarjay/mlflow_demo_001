@@ -11,4 +11,4 @@ RUN pip3 install -r requirements.txt
 EXPOSE 8000
 COPY . .
 ENTRYPOINT [ "python" ]
-CMD ["api.py"]
+CMD ["app.py"]
