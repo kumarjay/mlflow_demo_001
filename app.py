@@ -65,9 +65,9 @@ def upload_file():
 @app.route('/predict_data', methods=['GET', 'POST'])
 @cross_origin()
 def predict():
-    all_col_ = ['fixed', 'acidity', 'volatile', 'acidity', 'citric', 'acid', 'residual', 'sugar',
-                'chlorides', 'free', 'sulfur', 'dioxide', 'total', 'sulfur',
-                'dioxide', 'density', 'pH', 'sulphates', 'alcohol']
+    all_col_ = ['fixed acidity', 'volatile acidity', 'citric acid', 'residual sugar',
+                'chlorides', 'free sulfur dioxide', 'total sulfur dioxide',
+                'density', 'pH', 'sulphates', 'alcohol']
 
     return render_template('inner-page.html', columns= all_col_)
 
@@ -75,19 +75,22 @@ def predict():
 @app.route('/result', methods=['GET', 'POST'])
 @cross_origin()
 def result():
-    all_col_ = ['fixed', 'acidity', 'volatile', 'acidity', 'citric', 'acid', 'residual', 'sugar',
-                'chlorides', 'free', 'sulfur', 'dioxide', 'total', 'sulfur',
-                'dioxide', 'density', 'pH', 'sulphates', 'alcohol']
+    all_col_ = ['fixed acidity', 'volatile acidity', 'citric acid', 'residual sugar',
+                'chlorides', 'free sulfur dioxide', 'total sulfur dioxide',
+                'density', 'pH', 'sulphates', 'alcohol']
+
     input_data= {}
+    datas= []
     for col in all_col_:
         col_val= request.form.get(col)
         input_data[col]= col_val
+        datas.append(col_val)
 
     print(input_data)
     ENDPOINT_NAME= 'https://jswaxdsra3.execute-api.us-east-1.amazonaws.com/sagemaker-004'
     # runtime = boto3.client('runtime.sagemaker')
     data= {
-        "data": [[7.8, 0.88, 0, 2.6, 0.098, 25, 67, 0.9968, 3.2, 0.68, 9.8]]
+        "data": datas
     }
 
     # if isinstance(event['body'], (unicode, str)):
@@ -130,4 +133,4 @@ def result():
 
 
 if __name__ == '__main__':
-    app.run(host='0.0.0.0', port=8000, debug=True)
+    app.run(host='0.0.0.0', port=8080, debug=True)
